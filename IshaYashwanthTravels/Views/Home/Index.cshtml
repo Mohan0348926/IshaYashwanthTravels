@@ -78,7 +78,7 @@
                     </div>
                 }
 
-                <form asp-controller="Home" asp-action="Contact" method="post">
+                <form id="contactForm">
 
                     <div class="mb-3">
                         <label class="form-label">Name</label>
@@ -108,10 +108,24 @@
                                   placeholder="Enter your travel enquiry here...">
                         </textarea>
                     </div>
+                    <button type="submit"
+                            id="submitBtn"
+                            class="btn btn-primary w-100 rounded-pill">
 
-                    <button type="submit" class="btn btn-primary w-100 rounded-pill">
-                        Submit Enquiry
+                        <span id="btnText">Submit Enquiry</span>
+
+                        <span id="btnSpinner"
+                              class="spinner-border spinner-border-sm d-none ms-2">
+                        </span>
+
                     </button>
+
+                    <div id="successMessage"
+                         class="alert alert-success text-center mt-3 d-none">
+
+                        Enquiry sent successfully! We will contact you soon.
+
+                    </div>
 
                 </form>
             </div>
@@ -126,6 +140,56 @@
             </small>
             </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+    <script>
+        $("#contactForm").submit(function (e) {
+            e.preventDefault();
+
+            $("#submitBtn").prop("disabled", true);
+            $("#btnText").text("Sending...");
+            $("#btnSpinner").removeClass("d-none");
+
+            let formData = {
+                Name: $("#Name").val(),
+                Company: $("#Company").val(),
+                Phone: $("#Phone").val(),
+                Mail: $("#Mail").val(),
+                Message: $("#Message").val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("Contact", "Home")',
+                type: 'POST',
+                data: formData,
+
+                success: function (response) {
+                    if (response.success) {
+                        $("#successMessage")
+                            .removeClass("d-none")
+                            .html("Enquiry sent successfully! We will contact you soon.");
+
+                        $("#btnText").text("Submitted");
+                        $("#btnSpinner").addClass("d-none");
+
+                        setTimeout(function () {
+                            location.reload();
+                        }, 5000);
+                    }
+                },
+
+                error: function () {
+                    $("#successMessage")
+                        .removeClass("d-none alert-success")
+                        .addClass("alert-danger")
+                        .html("Something went wrong. Please try again.");
+
+                    $("#btnText").text("Submit Enquiry");
+                    $("#btnSpinner").addClass("d-none");
+                    $("#submitBtn").prop("disabled", false);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

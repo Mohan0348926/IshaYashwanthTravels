@@ -18,13 +18,16 @@ namespace IshaYaswanthTravels.Controllers
             return View();
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Contact(ContactViewModel model)
         {
             await _emailService.SendContactMail(model);
 
-            TempData["Success"] = "Thank you! We will contact you soon.";
-            return RedirectToAction("Index");
+            return Json(new
+            {
+                success = true
+            });
         }
     }
 }
