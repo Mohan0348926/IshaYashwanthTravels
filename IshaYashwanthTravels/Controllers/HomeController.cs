@@ -22,12 +22,24 @@ namespace IshaYaswanthTravels.Controllers
         [HttpPost]
         public async Task<IActionResult> Contact(ContactViewModel model)
         {
-            await _emailService.SendContactMail(model);
-
-            return Json(new
+            try
             {
-                success = true
-            });
+                await _emailService.SendContactMail(model);
+
+                return Json(new
+                {
+                    success = true,
+                    message = "Enquiry sent successfully!"
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = ex.Message
+                });
+            }
         }
     }
 }

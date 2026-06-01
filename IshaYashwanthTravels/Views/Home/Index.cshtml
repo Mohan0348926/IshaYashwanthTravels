@@ -163,20 +163,34 @@
                 type: 'POST',
                 data: formData,
 
-                success: function (response) {
-                    if (response.success) {
-                        $("#successMessage")
-                            .removeClass("d-none")
-                            .html("Enquiry sent successfully! We will contact you soon.");
+                        success: function (response) {
 
-                        $("#btnText").text("Submitted");
-                        $("#btnSpinner").addClass("d-none");
+            if (response.success) {
 
-                        setTimeout(function () {
-                            location.reload();
-                        }, 5000);
-                    }
-                },
+                $("#successMessage")
+                    .removeClass("d-none alert-danger")
+                    .addClass("alert-success")
+                    .html("Enquiry sent successfully! We will contact you soon.");
+
+                $("#btnText").text("Submitted");
+                $("#btnSpinner").addClass("d-none");
+
+                setTimeout(function () {
+                    location.reload();
+                }, 5000);
+            }
+            else {
+
+                $("#successMessage")
+                    .removeClass("d-none alert-success")
+                    .addClass("alert-danger")
+                    .html(response.message || "Mail sending failed.");
+
+                $("#btnText").text("Submit Enquiry");
+                $("#btnSpinner").addClass("d-none");
+                $("#submitBtn").prop("disabled", false);
+            }
+        },
 
                 error: function () {
                     $("#successMessage")
