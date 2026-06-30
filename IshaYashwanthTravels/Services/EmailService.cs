@@ -16,40 +16,54 @@ namespace IshaYaswanthTravels.Services
 
         public async Task SendContactMail(ContactViewModel model)
         {
-            var email = new MimeMessage();
-
-            email.From.Add(MailboxAddress.Parse(_config["EmailSettings:SenderEmail"]));
-            email.To.Add(MailboxAddress.Parse(_config["EmailSettings:OwnerEmail"]));
-
-            email.Subject = "New Enquiry - Isha Yaswanth Travels";
-
-            email.Body = new TextPart("html")
+            try
             {
-                Text = $@"
-                <h2>New Enquiry</h2>
-                <p><b>Name:</b> {model.Name}</p>
-                <p><b>Company:</b> {model.Company}</p>
-                <p><b>Phone:</b> {model.Phone}</p>
-                <p><b>Email:</b> {model.Mail}</p>
-                <p><b>Message:</b> {model.Message}</p>"
-            };
+                Console.WriteLine("Creating email...");
 
-            using var smtp = new SmtpClient();
+                var email = new MimeMessage();
 
-            smtp.Timeout = 120000; // 2 minutes
+                email.From.Add(MailboxAddress.Parse(_config["EmailSettings:SenderEmail"]));
+                email.To.Add(MailboxAddress.Parse(_config["EmailSettings:OwnerEmail"]));
 
-            await smtp.ConnectAsync(
-                _config["EmailSettings:SmtpServer"],
-                int.Parse(_config["EmailSettings:Port"]),
-                SecureSocketOptions.StartTls);
+                email.Subject = "New Enquiry - Isha Yaswanth Travels";
 
-            await smtp.AuthenticateAsync(
-                _config["EmailSettings:SenderEmail"],
-                _config["EmailSettings:SenderPassword"]);
+                email.Body = new TextPart("html")
+                {
+                    Text = $"Name: {model.Name}<br/>Phone: {model.Phone}"
+                };
 
-            await smtp.SendAsync(email);
+                using var smtp = new SmtpClient();
 
-            await smtp.DisconnectAsync(true);
+                smtp.Timeout = 30000;
+
+                Console.WriteLine("Connecting...");
+
+                await smtp.ConnectAsync(
+                    _config["EmailSettings:SmtpServer"],
+                    int.Parse(_config["EmailSettings:Port"]),
+                    SecureSocketOptions.StartTls);
+
+                Console.WriteLine("Connected.");
+
+                await smtp.AuthenticateAsync(
+                    _config["EmailSettings:SenderEmail"],
+                    _config["EmailSettings:SenderPassword"]);
+
+                Console.WriteLine("Authenticated.");
+
+                await smtp.SendAsync(email);
+
+                Console.WriteLine("Mail sent.");
+
+                await smtp.DisconnectAsync(true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("EMAIL ERROR:");
+                Console.WriteLine(ex.ToString());
+
+                throw;
+            }
         }
     }
 }
