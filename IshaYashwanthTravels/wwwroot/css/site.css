@@ -1,83 +1,528 @@
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    overflow-x: hidden;
+/*======================
+    STATISTICS
+=======================*/
+
+.stats-section {
+    background: #f8fafc;
 }
 
-.travel-header {
-    background: linear-gradient(90deg, #001f3f, #0052cc);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.stat-card {
+    background: #fff;
+    padding: 35px;
+    border-radius: 18px;
+    transition: .4s;
+    box-shadow: 0 15px 35px rgba(0,0,0,.08);
 }
 
-.hero-section {
-    min-height: 85vh;
-    background: linear-gradient(135deg, #0d6efd, #6610f2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 1.2s ease-in-out;
+    .stat-card:hover {
+        transform: translateY(-10px);
+    }
+
+.stat-icon {
+    font-size: 45px;
+    color: #0d6efd;
+    margin-bottom: 15px;
 }
 
-.hero-title {
-    animation: slideDown 1s ease;
+.stat-card h2 {
+    font-weight: 700;
+    color: #0d6efd;
 }
 
-.service-card {
-    padding: 30px;
-    border-radius: 20px;
+.stat-card p {
+    color: #666;
+}
+
+/*======================
+ WHY CHOOSE US
+=======================*/
+
+.section-subtitle {
+    color: #0d6efd;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.section-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+.section-text {
+    color: #777;
+    max-width: 700px;
+    margin: auto;
+}
+
+.feature-card {
     background: white;
-    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    border-radius: 20px;
+    padding: 35px;
     text-align: center;
-    transition: 0.3s;
+    transition: .4s;
+    box-shadow: 0 15px 40px rgba(0,0,0,.08);
     height: 100%;
 }
 
-    .service-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 40px rgba(0,0,0,.2);
+    .feature-card:hover {
+        transform: translateY(-12px);
+        background: #0d6efd;
+        color: white;
     }
 
-.contact-section {
-    background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+        .feature-card:hover p {
+            color: #fff;
+        }
+
+.feature-icon {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    background: #eef5ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    font-size: 35px;
+    color: #0d6efd;
 }
 
-.contact-card {
-    max-width: 600px;
+.feature-card:hover .feature-icon {
+    background: white;
+}
+
+
+/*======================
+ SERVICES SECTION
+=======================*/
+
+
+.services-section {
+    background: #f8fafc;
+}
+
+
+
+.service-card {
     background: white;
     padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.15);
+    border-radius: 22px;
+    height: 100%;
+    transition: .4s;
+    box-shadow: 0 15px 35px rgba(0,0,0,.08);
 }
 
-.form-control {
-    height: 48px;
-    border-radius: 12px;
-}
 
-.footer {
-    background: linear-gradient(90deg, #001f3f, #003f88);
-}
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+    .service-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 25px 50px rgba(0,0,0,.15);
     }
 
-    to {
-        opacity: 1;
+
+
+
+.service-icon {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: linear-gradient( 135deg, #0d6efd, #00c6ff);
+    color: white;
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+
+
+
+.service-card h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+
+
+.service-card p {
+    color: #666;
+    line-height: 1.7;
+}
+
+
+
+
+.service-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+
+
+    .service-link i {
+        margin-left: 8px;
+        transition: .3s;
+    }
+
+
+
+    .service-link:hover i {
+        transform: translateX(6px);
+    }
+
+/*======================
+ REVIEWS
+=======================*/
+
+
+.review-card {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.08);
+    height: 100%;
+}
+
+
+
+.review-stars {
+    color: #ffc107;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+
+.review-card span {
+    color: #777;
+}
+
+
+
+
+
+/*======================
+ CTA
+=======================*/
+
+
+.cta-section {
+    background: linear-gradient( 135deg, #0d6efd, #003b99);
+    padding: 80px 0;
+    color: white;
+}
+
+
+
+    .cta-section h2 {
+        font-size: 42px;
+        font-weight: 700;
+    }
+
+
+
+
+
+/*======================
+ CONTACT
+=======================*/
+
+
+.contact-box {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.08);
+}
+
+
+.contact-info i {
+    color: #0d6efd;
+    margin-right: 10px;
+}
+
+
+
+
+
+/*======================
+ FOOTER
+=======================*/
+
+
+.footer-section {
+    background: #111827;
+    color: white;
+    padding: 50px 0;
+}
+
+
+
+    .footer-section a {
+        color: #ddd;
+        text-decoration: none;
+    }
+
+
+.social-icons a {
+    font-size: 25px;
+    margin-right: 15px;
+}
+
+
+
+
+
+/*======================
+ WHATSAPP FLOAT
+=======================*/
+
+
+.whatsapp-float {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    z-index: 999;
+    text-decoration: none;
+}
+
+/*======================
+ GLOBAL
+=======================*/
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: 'Segoe UI',sans-serif;
+    overflow-x: hidden;
+}
+
+
+
+/*======================
+ NAVBAR
+=======================*/
+
+
+.custom-navbar {
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(10px);
+    transition: .4s;
+}
+
+
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+
+.nav-link {
+    font-weight: 500;
+    margin-left: 15px;
+}
+
+
+    .nav-link:hover {
+        color: #ffc107 !important;
+    }
+
+
+
+
+
+/*======================
+ HERO IMPROVEMENT
+=======================*/
+
+
+.hero-section {
+    min-height: 100vh;
+    background: linear-gradient( rgba(0,0,0,.65), rgba(0,0,0,.65) ), url('/images/travel-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+
+
+
+.hero-title {
+    font-size: 60px;
+    font-weight: 800;
+}
+
+
+
+
+.hero-description {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #ddd;
+}
+
+
+
+.hero-badge {
+    background: #ffc107;
+    color: #111;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+
+
+.hero-image {
+    animation: floatImage 4s infinite ease-in-out;
+}
+
+
+
+@keyframes floatImage {
+
+
+    0% {
+        transform: translateY(0);
+    }
+
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+
+    100% {
+        transform: translateY(0);
     }
 }
 
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-40px);
+
+
+
+
+/*======================
+ BUTTON EFFECT
+=======================*/
+
+
+.btn {
+    transition: .3s;
+}
+
+
+
+    .btn:hover {
+        transform: translateY(-3px);
     }
 
-    to {
+
+
+
+
+
+
+/*======================
+ SCROLL ANIMATION
+=======================*/
+
+
+.animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: .8s;
+}
+
+
+
+    .animate.show {
         opacity: 1;
         transform: translateY(0);
+    }
+
+
+
+
+
+
+
+/*======================
+ MOBILE RESPONSIVE
+=======================*/
+
+
+@media(max-width:991px) {
+
+
+
+    .hero-title {
+        font-size: 42px;
+    }
+
+
+
+    .hero-description {
+        font-size: 17px;
+    }
+
+
+
+    .hero-section {
+        text-align: center;
+    }
+
+
+
+    .navbar-nav {
+        background: rgba(0,0,0,.8);
+        padding: 20px;
+        border-radius: 15px;
+    }
+}
+
+
+
+
+@media(max-width:576px) {
+
+
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+
+
+    .section-title {
+        font-size: 32px;
+    }
+
+
+
+    .cta-section h2 {
+        font-size: 30px;
+    }
+
+
+
+    .stat-card,
+    .feature-card,
+    .service-card {
+        padding: 25px;
     }
 }

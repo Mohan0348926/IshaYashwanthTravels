@@ -1,4 +1,92 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener("DOMContentLoaded", function () {
 
-// Write your JavaScript code.
+
+
+    // Scroll Animation
+
+
+    const elements = document.querySelectorAll(
+        ".stat-card, .feature-card, .service-card, .review-card"
+    );
+
+
+
+    const observer = new IntersectionObserver(
+        entries => {
+
+
+            entries.forEach(entry => {
+
+
+                if (entry.isIntersecting) {
+
+
+                    entry.target.classList.add("animate");
+                    entry.target.classList.add("show");
+
+
+                }
+
+
+            });
+
+
+
+        },
+        {
+            threshold: 0.2
+        }
+
+
+    );
+
+
+
+    elements.forEach(item => {
+
+
+        item.classList.add("animate");
+
+        observer.observe(item);
+
+
+    });
+
+
+
+
+
+    // Navbar background on scroll
+
+
+    window.addEventListener("scroll", function () {
+
+
+        let navbar = document.querySelector(".custom-navbar");
+
+
+
+        if (window.scrollY > 50) {
+
+
+            navbar.style.background = "rgba(0,0,0,0.9)";
+
+
+        }
+
+        else {
+
+
+            navbar.style.background = "rgba(0,0,0,0.45)";
+
+
+        }
+
+
+    });
+
+
+
+
+
+});
