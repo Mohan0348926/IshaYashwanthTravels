@@ -546,6 +546,31 @@ body {
     }
 }
 
+/*======================
+ BOOKING MODAL - MODERN STYLE
+=======================*/
+
+.booking-modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 25px 60px rgba(0,0,0,.25);
+}
+
+    .booking-modal-content .form-control,
+    .booking-modal-content .form-select {
+        border-radius: 12px;
+        border: 1px solid #e2e2e2;
+    }
+
+        .booking-modal-content .form-control:focus,
+        .booking-modal-content .form-select:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 .2rem rgba(255,193,7,.25);
+        }
+
+    .booking-modal-content .form-floating > label {
+        color: #888;
+    }
 
 
 
