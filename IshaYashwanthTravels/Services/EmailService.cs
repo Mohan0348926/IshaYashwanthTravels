@@ -1,5 +1,6 @@
-﻿using System.Net;
-using System.Net.Mail;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace IshaYashwanthTravels.Services
@@ -7,6 +8,7 @@ namespace IshaYashwanthTravels.Services
     public class EmailService
     {
         private readonly IConfiguration _config;
+        private static readonly HttpClient _httpClient = new HttpClient();
 
         public EmailService(IConfiguration config)
         {
@@ -15,27 +17,26 @@ namespace IshaYashwanthTravels.Services
 
         private async Task SendAsync(string toEmail, string subject, string body)
         {
-            var smtpServer = _config["EmailSettings:SmtpServer"];
-            var smtpPort = int.Parse(_config["EmailSettings:SmtpPort"]);
+            var apiKey = _config["Resend:ApiKey"];
             var senderEmail = _config["EmailSettings:SenderEmail"];
-            var senderPassword = _config["EmailSettings:SenderPassword"];
             var senderName = _config["EmailSettings:SenderName"];
 
-            using var client = new SmtpClient(smtpServer, smtpPort)
+            var payload = new
             {
-                Credentials = new NetworkCredential(senderEmail, senderPassword),
-                EnableSsl = true
+                from = $"{senderName} <{senderEmail}>",
+                to = new[] { toEmail },
+                subject = subject,
+                text = body
             };
 
-            var mail = new MailMessage
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://api.resend.com/emails")
             {
-                From = new MailAddress(senderEmail, senderName),
-                Subject = subject,
-                Body = body
+                Content = JsonContent.Create(payload)
             };
-            mail.To.Add(toEmail);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
-            await client.SendMailAsync(mail);
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
         }
 
         public async Task SendBookingEmailsAsync(string name, string email, string phone, string vehicleType, string message)
