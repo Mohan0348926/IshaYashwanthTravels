@@ -15,6 +15,7 @@ builder.Configuration
         reloadOnChange: false)
     .AddEnvironmentVariables();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<EmailService>(); 
 var app = builder.Build();
 app.UseStaticFiles();
 app.UseRouting();
