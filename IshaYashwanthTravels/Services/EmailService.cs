@@ -16,28 +16,33 @@ namespace IshaYashwanthTravels.Services
         }
 
         private async Task SendAsync(string toEmail, string subject, string body)
-        {
-            var apiKey = _config["Resend:ApiKey"];
-            var senderEmail = _config["EmailSettings:SenderEmail"];
-            var senderName = _config["EmailSettings:SenderName"];
+{
+    var apiKey = _config["Resend:ApiKey"];
+    var senderEmail = _config["EmailSettings:SenderEmail"];
+    var senderName = _config["EmailSettings:SenderName"];
 
-            var payload = new
-            {
-                from = $"{senderName} <{senderEmail}>",
-                to = new[] { toEmail },
-                subject = subject,
-                text = body
-            };
+    var payload = new
+    {
+        from = $"{senderName} <{senderEmail}>",
+        to = new[] { toEmail },
+        subject = subject,
+        text = body
+    };
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://api.resend.com/emails")
-            {
-                Content = JsonContent.Create(payload)
-            };
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+    var request = new HttpRequestMessage(HttpMethod.Post, "https://api.resend.com/emails")
+    {
+        Content = JsonContent.Create(payload)
+    };
+    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-        }
+    var response = await _httpClient.SendAsync(request);
+
+    if (!response.IsSuccessStatusCode)
+    {
+        var errorBody = await response.Content.ReadAsStringAsync();
+        throw new Exception($"Resend API error ({response.StatusCode}): {errorBody}");
+    }
+}
 
         public async Task SendBookingEmailsAsync(string name, string email, string phone, string vehicleType, string message)
         {
