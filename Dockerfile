@@ -4,18 +4,19 @@ WORKDIR /app
 
 COPY . .
 
-RUN dotnet restore
+RUN dotnet restore IshaYashwanthTravels/IshaYashwanthTravels.csproj
 
-RUN dotnet publish -c Release -o /out
+RUN dotnet publish IshaYashwanthTravels/IshaYashwanthTravels.csproj \
+    -c Release \
+    -o /out \
+    --no-restore
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 
 WORKDIR /app
 
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+
 COPY --from=build /out .
-
-ENV ASPNETCORE_URLS=http://+:8080
-
-EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "IshaYashwanthTravels.dll"]

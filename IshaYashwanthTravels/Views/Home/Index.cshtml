@@ -1138,15 +1138,25 @@
     </footer>
 
 
-
     <!-- ================= BOOKING MODAL ================= -->
-    <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+
+    <div class="modal fade"
+         id="bookingModal"
+         tabindex="-1"
+         aria-hidden="true">
+
         <div class="modal-dialog modal-lg modal-dialog-centered">
+
             <div class="modal-content booking-modal-content">
 
+                <!-- Modal Header -->
                 <div class="modal-header border-0">
+
                     <div>
-                        <small class="text-warning fw-bold">PLAN YOUR JOURNEY</small>
+                        <small class="text-warning fw-bold">
+                            PLAN YOUR JOURNEY
+                        </small>
+
                         <h5 class="modal-title mt-1">
                             <i class="fa-solid fa-route me-2 text-warning"></i>
                             Book Your Trip
@@ -1156,22 +1166,29 @@
                     <button type="button"
                             class="btn-close"
                             data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                            aria-label="Close">
+                    </button>
+
                 </div>
 
+                <!-- Modal Body -->
                 <div class="modal-body pt-0">
 
+                    <!-- Booking Response -->
                     <div id="bookingResponse"></div>
 
+                    <!-- Booking Form -->
                     <form id="bookingForm">
 
                         @Html.AntiForgeryToken()
 
-                        <!-- Name + Email -->
                         <div class="row g-3">
 
+                            <!-- Name -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <input type="text"
                                            class="form-control"
                                            id="bookingName"
@@ -1182,11 +1199,16 @@
                                     <label for="bookingName">
                                         Your Name *
                                     </label>
+
                                 </div>
+
                             </div>
 
+                            <!-- Email -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <input type="email"
                                            class="form-control"
                                            id="bookingEmail"
@@ -1197,12 +1219,16 @@
                                     <label for="bookingEmail">
                                         Email Address *
                                     </label>
+
                                 </div>
+
                             </div>
 
-                            <!-- Phone + Travel Date -->
+                            <!-- Phone -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <input type="tel"
                                            class="form-control"
                                            id="bookingPhone"
@@ -1213,11 +1239,16 @@
                                     <label for="bookingPhone">
                                         Phone Number *
                                     </label>
+
                                 </div>
+
                             </div>
 
+                            <!-- Travel Date -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <input type="date"
                                            class="form-control"
                                            id="travelDate"
@@ -1227,12 +1258,16 @@
                                     <label for="travelDate">
                                         Travel Date *
                                     </label>
+
                                 </div>
+
                             </div>
 
                             <!-- From -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <input type="text"
                                            class="form-control"
                                            id="fromLocation"
@@ -1243,12 +1278,16 @@
                                     <label for="fromLocation">
                                         From *
                                     </label>
+
                                 </div>
+
                             </div>
 
                             <!-- To -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <input type="text"
                                            class="form-control"
                                            id="toLocation"
@@ -1259,12 +1298,16 @@
                                     <label for="toLocation">
                                         To *
                                     </label>
+
                                 </div>
+
                             </div>
 
                             <!-- Passengers -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <input type="number"
                                            class="form-control"
                                            id="passengers"
@@ -1278,88 +1321,148 @@
                                     <label for="passengers">
                                         Number of Passengers *
                                     </label>
+
                                 </div>
+
                             </div>
 
                             <!-- Trip Type -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <select class="form-select"
                                             id="tripType"
                                             name="TripType"
                                             required>
 
-                                        <option value="">Select Trip Type</option>
-                                        <option value="One Way">One Way</option>
-                                        <option value="Round Trip">Round Trip</option>
-                                        <option value="Multi Day Trip">Multi Day Trip</option>
+                                        <option value="">
+                                            Select Trip Type
+                                        </option>
+
+                                        <option value="One Way">
+                                            One Way
+                                        </option>
+
+                                        <option value="Round Trip">
+                                            Round Trip
+                                        </option>
+
+                                        <option value="Multi Day Trip">
+                                            Multi Day Trip
+                                        </option>
 
                                     </select>
 
                                     <label for="tripType">
                                         Trip Type *
                                     </label>
+
                                 </div>
+
                             </div>
 
                             <!-- Vehicle -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <select class="form-select"
                                             id="bookingVehicle"
                                             name="VehicleType"
                                             required>
 
-                                        <option value="">Select Vehicle</option>
-                                        <option value="Innova">Innova</option>
-                                        <option value="Innova Crysta">Innova Crysta</option>
-                                        <option value="Etios">Etios</option>
-                                        <option value="Ertiga">Ertiga</option>
-                                        <option value="Bus 21 Seater">Bus 21 Seater</option>
-                                        <option value="Bus 25 Seater">Bus 25 Seater</option>
-                                        <option value="Bus 35 Seater">Bus 35 Seater</option>
-                                        <option value="Bus 40 Seater">Bus 40 Seater</option>
-                                        <option value="Bus 50 Seater">Bus 50 Seater</option>
-                                        <option value="Not Sure">Not Sure Yet</option>
+                                        <option value="">
+                                            Select Vehicle
+                                        </option>
+
+                                        <option value="Innova">
+                                            Innova
+                                        </option>
+
+                                        <option value="Innova Crysta">
+                                            Innova Crysta
+                                        </option>
+
+                                        <option value="Etios">
+                                            Etios
+                                        </option>
+
+                                        <option value="Ertiga">
+                                            Ertiga
+                                        </option>
+
+                                        <option value="Bus 21 Seater">
+                                            Bus 21 Seater
+                                        </option>
+
+                                        <option value="Bus 25 Seater">
+                                            Bus 25 Seater
+                                        </option>
+
+                                        <option value="Bus 35 Seater">
+                                            Bus 35 Seater
+                                        </option>
+
+                                        <option value="Bus 40 Seater">
+                                            Bus 40 Seater
+                                        </option>
+
+                                        <option value="Bus 50 Seater">
+                                            Bus 50 Seater
+                                        </option>
+
+                                        <option value="Not Sure">
+                                            Not Sure Yet
+                                        </option>
 
                                     </select>
 
                                     <label for="bookingVehicle">
                                         Preferred Vehicle *
                                     </label>
+
                                 </div>
+
                             </div>
 
                             <!-- Additional Requirements -->
                             <div class="col-md-6">
+
                                 <div class="form-floating">
+
                                     <textarea class="form-control"
                                               id="bookingMessage"
                                               name="Message"
                                               placeholder="Additional Requirements"
-                                              style="height: 100px"></textarea>
+                                              style="height:100px"></textarea>
 
                                     <label for="bookingMessage">
                                         Additional Requirements
                                     </label>
+
                                 </div>
+
                             </div>
 
                         </div>
 
-                        <!-- Submit -->
+                        <!-- Submit Button -->
                         <button type="submit"
                                 id="bookingSubmitBtn"
                                 class="btn btn-warning btn-lg rounded-pill px-5 w-100 mt-4">
 
                             <span id="bookingBtnText">
+
                                 <i class="fa-solid fa-paper-plane me-2"></i>
                                 Submit Booking
+
                             </span>
 
                             <span id="bookingSpinner"
                                   class="spinner-border spinner-border-sm d-none"
-                                  role="status">
+                                  role="status"
+                                  aria-hidden="true">
                             </span>
 
                         </button>
@@ -1367,9 +1470,15 @@
                     </form>
 
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
+   
+                        
 
     
     <!-- Bootstrap -->
