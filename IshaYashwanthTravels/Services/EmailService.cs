@@ -38,20 +38,67 @@ namespace IshaYashwanthTravels.Services
             await client.SendMailAsync(mail);
         }
 
-        public async Task SendBookingEmailsAsync(string name, string email, string phone, string vehicleType, string message)
+        public async Task SendBookingEmailsAsync(
+      string name,
+      string email,
+      string phone,
+      string travelDate,
+      string from,
+      string to,
+      string passengers,
+      string tripType,
+      string vehicleType,
+      string message)
         {
             var ownerEmail = _config["EmailSettings:OwnerEmail"];
 
             var ownerTask = SendAsync(
                 ownerEmail,
                 "New Trip Booking - " + name,
-                $"Name: {name}\nEmail: {email}\nPhone: {phone}\nVehicle Type: {vehicleType}\nMessage: {message}"
+                $@"NEW TRIP BOOKING
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+
+TRAVEL DETAILS
+-------------------------
+Travel Date: {travelDate}
+From: {from}
+To: {to}
+Passengers: {passengers}
+Trip Type: {tripType}
+Vehicle Type: {vehicleType}
+
+Additional Requirements:
+{message}
+"
             );
 
             var customerTask = SendAsync(
                 email,
                 "We Received Your Enquiry - Isha Yaswanth Travels",
-                $"Dear {name},\n\nThank you for contacting Isha Yaswanth Travels. We will contact you soon.\n\nRegards,\nRamesh\nIsha Yaswanth Travels\n9113908477"
+                $@"Dear {name},
+
+Thank you for contacting Isha Yaswanth Travels.
+
+We have received your travel booking enquiry.
+
+Travel Details
+-------------------------
+Travel Date: {travelDate}
+From: {from}
+To: {to}
+Passengers: {passengers}
+Trip Type: {tripType}
+Vehicle Type: {vehicleType}
+
+We will contact you soon to confirm the details.
+
+Regards,
+Ramesh
+Isha Yaswanth Travels
+9113908477"
             );
 
             await Task.WhenAll(ownerTask, customerTask);
