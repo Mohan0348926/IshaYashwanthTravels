@@ -21,28 +21,68 @@ namespace IshaYashwanthTravels.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult SubmitBooking(string Name, string Email, string Phone, string VehicleType, string Message)
+       [HttpPost]
+public async Task<IActionResult> SubmitBooking(
+    string Name,
+    string Email,
+    string Phone,
+    string TravelDate,
+    string From,
+    string To,
+    string Passengers,
+    string TripType,
+    string VehicleType,
+    string Message)
+{
+    if (string.IsNullOrWhiteSpace(Name) ||
+        string.IsNullOrWhiteSpace(Email) ||
+        string.IsNullOrWhiteSpace(Phone) ||
+        string.IsNullOrWhiteSpace(TravelDate) ||
+        string.IsNullOrWhiteSpace(From) ||
+        string.IsNullOrWhiteSpace(To))
+    {
+        return Json(new
         {
-            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Phone))
-            {
-                return Json(new { success = false, message = "Please fill all required fields." });
-            }
+            success = false,
+            message = "Please fill all required fields."
+        });
+    }
 
-            // Fire-and-forget: don't make the customer wait for SMTP round trip
-            _ = Task.Run(async () =>
-            {
-                try
-                {
-                    await _emailService.SendBookingEmailsAsync(Name, Email, Phone, VehicleType, Message);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Failed to send booking emails for {Name}", Name);
-                }
-            });
+    try
+    {
+        await _emailService.SendBookingEmailsAsync(
+            Name,
+            Email,
+            Phone,
+            TravelDate,
+            From,
+            To,
+            Passengers,
+            TripType,
+            VehicleType,
+            Message
+        );
 
-            return Json(new { success = true, message = "Thank you! We will contact you soon." });
-        }
+        return Json(new
+        {
+            success = true,
+            message = "Thank you! We will contact you soon."
+        });
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(
+            ex,
+            "Failed to send booking emails for {Name}",
+            Name
+        );
+
+        return Json(new
+        {
+            success = false,
+            message = "Unable to send your booking right now. Please try again."
+        });
+    }
+}
     }
 }
