@@ -1,0 +1,21 @@
+
+name: Keep Ishaya Yashwanth Travels Active
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Render Website
+        run: |
+          curl --fail --silent --show-error \
+            --location \
+            --retry 2 \
+            --max-time 120 \
+            "https://ishayashwanthtravels.onrender.com/"
