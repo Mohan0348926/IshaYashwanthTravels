@@ -14,14 +14,14 @@ jobs:
     steps:
       - name: Ping Render Website
         run: |
-          echo "Checking Render website..."
+          echo "Checking Render Website..."
 
-          curl --fail-with-body -L -sS \
+          curl --fail --silent --show-error \
+            --location \
             --retry 2 \
-            --retry-delay 5 \
             --max-time 120 \
-            -o /dev/null \
-            -w 'HTTP Status: %{http_code}\nFirst Byte: %{time_starttransfer}s\nTotal Time: %{time_total}s\n' \
+            --output /dev/null \
+            --write-out 'HTTP Status: %{http_code}\nFirst Byte: %{time_starttransfer}s\nTotal Time: %{time_total}s\n' \
             "https://ishayashwanthtravels.onrender.com/"
 
-          echo "Ping finished"
+          echo "Ping Completed"
